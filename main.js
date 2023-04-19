@@ -38,8 +38,8 @@ const batch = [
   mystery5,
 ];
 
-// Add your functions below:
 const validateCred = (cardNumber) => {
+  // Multiply every other digit from right (except the first one)
   let count = 0;
   let newArray = [];
   for (let i = cardNumber.length - 2; i >= 0; i--) {
