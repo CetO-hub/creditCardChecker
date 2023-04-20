@@ -58,10 +58,10 @@ const validateCred = (cardNumber) => {
   }
   // Add last card number of the argument array
   newArray.push(cardNumber[cardNumber.length - 1]);
-  // console.log(`Array is: ${newArray}`);
+
   // Sum up the array numbers
   let arraySum = newArray.reduce((acc, cur) => acc + cur);
-  // console.log(`Array sum is: ${arraySum}`);
+
   // Check if sum divided by 10 has a remainder
   if (arraySum % 10 === 0) {
     return true;
@@ -70,11 +70,44 @@ const validateCred = (cardNumber) => {
   }
 };
 
-const findInvalidCards = nestedArray => {
-  let invalidCards = nestedArray.filter(card => validateCred(card) === false)
+// Return all invalid card numbers from a array batch
+const findInvalidCards = (nestedArray) => {
+  let invalidCards = nestedArray.filter((card) => validateCred(card) === false);
   return invalidCards;
-}
+};
 
-
-console.log(validateCred(mystery2));
-console.log(findInvalidCards(batch));
+// Create array with company id with invalid card numbers
+const idInvalidCardCompanies = (nestedArray) => {
+  let idCompanies = [];
+  // Push company id to new array and avoiding duplicates
+  nestedArray.forEach((card) => {
+    switch (card[0]) {
+      case 3:
+        if (idCompanies.indexOf("Amex") === -1) {
+          idCompanies.push("Amex");
+        }
+        break;
+      case 4:
+        if (idCompanies.indexOf("Visa") === -1) {
+          idCompanies.push("Visa");
+        }
+        break;
+      case 5:
+        if (idCompanies.indexOf("Mastercard") === -1) {
+          idCompanies.push("Mastercard");
+        }
+        break;
+      case 6:
+        if (idCompanies.indexOf("Discover") === -1) {
+          idCompanies.push("Discover");
+        }
+        break;
+      default:
+        if (idCompanies.indexOf("Company not found") === -1) {
+          idCompanies.push("Company not found");
+        }
+        break;
+    }
+  });
+  return idCompanies;
+};
