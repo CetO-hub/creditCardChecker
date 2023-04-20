@@ -45,6 +45,10 @@ const validateCred = (cardNumber) => {
   for (let i = cardNumber.length - 2; i >= 0; i--) {
     if (count === 0 || count % 2 === 0) {
       let multiplied = cardNumber[i] * 2;
+      if (multiplied > 9) {
+        // Subtract 9 if multiplied digit is over 9
+        multiplied -= 9;
+      }
       newArray.push(multiplied);
       count++;
     } else {
@@ -52,7 +56,20 @@ const validateCred = (cardNumber) => {
       count++;
     }
   }
-  return newArray;
+  // Add last card number of the argument array
+  newArray.push(cardNumber[cardNumber.length - 1]);
+  // console.log(`Array is: ${newArray}`);
+  // Sum up the array numbers
+  let arraySum = newArray.reduce((acc, cur) => acc + cur);
+  // console.log(`Array sum is: ${arraySum}`);
+  // Check if sum divided by 10 has a remainder
+  if (arraySum % 10 === 0) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
-console.log(validateCred(valid1));
+
+
+console.log(validateCred(mystery2));
