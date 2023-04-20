@@ -70,6 +70,11 @@ const validateCred = (cardNumber) => {
   }
 };
 
+const findInvalidCards = nestedArray => {
+  let invalidCards = nestedArray.filter(card => validateCred(card) === false)
+  return invalidCards;
+}
 
 
 console.log(validateCred(mystery2));
+console.log(findInvalidCards(batch));
